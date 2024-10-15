@@ -17,8 +17,6 @@ import org.gluu.oxauth.model.audit.Action;
 import org.gluu.oxauth.model.audit.OAuth2AuditLog;
 import org.gluu.oxauth.model.authorize.AuthorizeRequestParam;
 import org.gluu.oxauth.model.common.Prompt;
-import org.gluu.oxauth.model.common.SessionId;
-import org.gluu.oxauth.model.common.SessionIdState;
 import org.gluu.oxauth.model.common.User;
 import org.gluu.oxauth.model.config.Constants;
 import org.gluu.oxauth.model.config.StaticConfiguration;
@@ -30,6 +28,8 @@ import org.gluu.oxauth.model.exception.InvalidSessionStateException;
 import org.gluu.oxauth.model.jwt.Jwt;
 import org.gluu.oxauth.model.jwt.JwtClaimName;
 import org.gluu.oxauth.model.jwt.JwtSubClaimObject;
+import org.gluu.oxauth.model.session.SessionId;
+import org.gluu.oxauth.model.session.SessionIdState;
 import org.gluu.oxauth.model.token.JwtSigner;
 import org.gluu.oxauth.model.util.JwtUtil;
 import org.gluu.oxauth.model.util.Pair;
@@ -930,9 +930,9 @@ public class SessionIdService {
         } catch (JSONException ex) {
             acrs = Util.splittedStringAsList(acrValues, " ");
         }
-        
-        
-        HashSet<String> resultAcrs = new HashSet<String>();
+
+
+        LinkedHashSet<String> resultAcrs = new LinkedHashSet<String>();
         for (String acr : acrs) {
         	resultAcrs.add(externalAuthenticationService.scriptName(acr));
         }
